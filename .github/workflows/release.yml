@@ -1,0 +1,25 @@
+name: Build on Linux
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up CMake
+      uses: cmake/setup-cmake@v1
+
+    - name: Build project
+      run: |
+        cd Builds/LinuxMakefile
+        CONFIG=Release make
