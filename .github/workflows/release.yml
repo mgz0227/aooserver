@@ -29,11 +29,11 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        token: ${{ secrets.MY_TOKEN }}  # 使用你的自定义 token
+        token: ${{ secrets.MY_TOKEN }}
       env:
         MY_TOKEN: ${{ secrets.MY_TOKEN }}
-      ...
-      
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload release asset
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
@@ -44,4 +44,10 @@ jobs:
         asset_content_type: application/octet-stream # 替换成你的文件类型
       env:
         MY_TOKEN: ${{ secrets.MY_TOKEN }}
-      ...
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: aooserver
+        path: Builds/LinuxMakefile/aooserver   # 替换成你的文件路径
