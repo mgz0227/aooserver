@@ -29,9 +29,11 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        token: ${{ secrets.MY_TOKEN }}
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
+        draft: false
+        prerelease: false
       env:
-        MY_TOKEN: ${{ secrets.MY_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload release asset
@@ -43,7 +45,6 @@ jobs:
         asset_name: aooserver                        # 替换成你的文件名称
         asset_content_type: application/octet-stream # 替换成你的文件类型
       env:
-        MY_TOKEN: ${{ secrets.MY_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload Artifact
